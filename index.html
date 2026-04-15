@@ -426,7 +426,12 @@
         }));
         setSelectedRemisionFolio(remision.folio);
         pushMovement('Salida venta', remision.client, remision.folio, -remision.items.reduce((acc, i) => acc + i.qty, 0));
-        setOrderItems([{ product: safeFinishedGoods[0]?.product || '', qty: 1 }]);
+        setSelectedCustomerId('');
+        setOrderClient('');
+        setOrderContact('');
+        setOrderEmail('');
+        setOrderPhone('');
+        setOrderItems([{ product: '', qty: 1 }]);
         setOrderNotes('');
         setNotice('Salida registrada y remisión generada.');
       };
@@ -789,7 +794,7 @@
                     <div className="table-wrap">
                       <table>
                         <thead><tr><th>Ver</th><th>Folio</th><th>Fecha</th><th>Cliente</th><th>Estatus</th><th>Total</th></tr></thead>
-                        <tbody>{store.savedRemisiones.map((r) => <tr key={r.folio}><td><Button size="sm" variant="outline" className="rounded-xl" onClick={() => { setSelectedRemisionFolio(r.folio); setNotice(`Remisión ${r.folio} abierta.`); }}>Ver</Button></td><td className="font-medium">{r.folio}</td><td>{r.date}</td><td>{r.client}</td><td>{r.paymentStatus === 'paid' ? 'Pagado' : 'Pendiente'}</td><td>{money(r.total)}</td></tr>)}</tbody>
+                        <tbody>{store.savedRemisiones.map((r) => <tr key={r.folio}><td><Button size="sm" variant="outline" className="rounded-xl" onClick={() => { setSelectedRemisionFolio(r.folio); setActiveTab('salidas'); setNotice(`Remisión ${r.folio} abierta.`); }}>Ver</Button></td><td className="font-medium">{r.folio}</td><td>{r.date}</td><td>{r.client}</td><td>{r.paymentStatus === 'paid' ? 'Pagado' : 'Pendiente'}</td><td>{money(r.total)}</td></tr>)}</tbody>
                       </table>
                     </div>
                   )}
